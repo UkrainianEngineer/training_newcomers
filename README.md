@@ -5,7 +5,7 @@ How to work with this repository:
 
   - Create your own branch from `master` branch:
 
-    git checkout -b <your_branch_name> master
+        git checkout -b <your_branch_name> master
 
   - Create a folder with your name:
 
@@ -20,11 +20,11 @@ How to work with this repository:
 
   - Commit all your changes into your own branch:
 
-      git commit -am <your_commit_message>
+        git commit -am <your_commit_message>
 
   - Push your local branch into remote:
 
-    git push -u origin <your_branch_name>
+        git push -u origin <your_branch_name>
 
 Please create a pull request with completed task.
 Pull request should be created from your own branch into `master`.
