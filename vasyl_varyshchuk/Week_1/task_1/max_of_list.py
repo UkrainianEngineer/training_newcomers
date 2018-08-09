@@ -3,7 +3,7 @@ This module finds maximum integer value from list of strings.
 
 '''
 
-data = ['one', '1', 'two', '2', 'ten', '10', '15', '-2', 'some long text goes here', '16.9']
+data = ['one', '1', 'two', '2', 'ten', '10', '15', '-2', 'some long text goes here', '16.9', '&']
 
 def get_max_value(iterable):
 
@@ -16,7 +16,10 @@ def get_max_value(iterable):
         except ValueError:
             print("Could not convert '{}' to an integer.".format(item))
 
-    return max(numbers)
+    if len(numbers) != 0:
+        return max(numbers)
+    else:
+        return None
 
 
 result = get_max_value(data)
