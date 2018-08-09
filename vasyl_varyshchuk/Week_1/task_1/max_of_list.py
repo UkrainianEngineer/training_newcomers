@@ -2,24 +2,21 @@
 This module finds maximum integer value from list of strings.
 
 '''
-import sys
 
 data = ['one', '1', 'two', '2', 'ten', '10', '15', '-2', 'some long text goes here', '16.9']
 
 def get_max_value(iterable):
 
-    max_value = -sys.maxint
+    numbers = []
 
-    for x in iterable:
+    for item in iterable:
+
         try:
-            if int(float(x)) > max_value:
-                max_value = int(float(x))
+            numbers.append(int(float(item)))
         except ValueError:
-            print("Could not convert '{}' to an integer.".format(x))
-    if max_value == -sys.maxint:
-        return None
-    else:
-        return max_value
+            print("Could not convert '{}' to an integer.".format(item))
+
+    return max(numbers)
 
 
 result = get_max_value(data)
