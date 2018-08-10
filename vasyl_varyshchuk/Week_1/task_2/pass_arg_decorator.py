@@ -8,14 +8,16 @@ def decorator(retries=None):
     def my_decorator(func):
 
         def func_wrapper():
-
-            i = 0
-            while i < retries:
-                try:
-                    func()
-                except Exception:
-                    i += 1
-                    print('Restart => {}'.format(i))
+            if retries is not None:
+                i = 0
+                while i < retries:
+                    try:
+                        func()
+                    except Exception:
+                        i += 1
+                        print('Restart => {}'.format(i))
+            else:
+                func()
 
         return func_wrapper
 
@@ -24,8 +26,10 @@ def decorator(retries=None):
 
 @decorator(retries=4)
 def some_function():
+    print('Tex Before Exception')
     raise Exception
-    print('I am a function.')
+    print('Text After Exception')
+    
 
 
 some_function()
