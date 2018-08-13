@@ -13,6 +13,7 @@ def decorator(retries=None):
             while i < retries:
                 try:
                     func()
+                    break
                 except Exception:
                     i += 1
                     print('Restart => {}'.format(i))

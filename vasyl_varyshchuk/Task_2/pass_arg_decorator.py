@@ -2,6 +2,8 @@
 This module implements a retry decorator with ability to pass a parameter into decorator
 """
 
+import random
+
 
 def decorator(retries=None):
 
@@ -9,12 +11,11 @@ def decorator(retries=None):
 
         def func_wrapper():
             if retries is not None:
-                i = 0
-                while i < retries:
+                for i in range(1, retries+1):
                     try:
                         func()
+                        break
                     except Exception:
-                        i += 1
                         print('Restart => {}'.format(i))
             else:
                 func()
@@ -26,9 +27,12 @@ def decorator(retries=None):
 
 @decorator(retries=4)
 def some_function():
-    print('Tex Before Exception')
-    raise Exception
-    print('Text After Exception')
+    print('Text Before Exception')
+    i = random.randint(1, 10)
+    if i > 5:
+        raise Exception
+    else:
+        print('This text prints when exception is not raised, i = {}'.format(i))
     
 
 
