@@ -1,32 +1,27 @@
 """
-This module implements a retry decorator with ability to pass a parameter into decorator
+This module implements a function retry decorator
 """
 
-
-def decorator(retries=None):
-
-    def my_decorator(func):
-
-        def func_wrapper():
-
-            i = 0
-            while i < retries:
-                try:
-                    func()
-                    break
-                except Exception:
-                    i += 1
-                    print('Restart => {}'.format(i))
-
-        return func_wrapper
-
-    return my_decorator
+RETRIES = 4
 
 
-@decorator(retries=4)
+def my_decorator(func):
+
+    def func_wrapper():
+        for i in range(0, RETRIES):
+            try:
+                func()
+                break
+            except Exception:
+                print('Restart => {}'.format(i+1))
+
+    return func_wrapper
+
+
+@my_decorator
 def some_function():
     raise Exception
-    print('I am a function.')
+    print('This text will not printed.')
 
 
 some_function()

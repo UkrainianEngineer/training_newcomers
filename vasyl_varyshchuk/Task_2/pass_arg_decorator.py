@@ -1,4 +1,5 @@
 """
+""
 This module implements a retry decorator with ability to pass a parameter into decorator
 """
 
@@ -11,12 +12,12 @@ def decorator(retries=None):
 
         def func_wrapper():
             if retries is not None:
-                for i in range(1, retries+1):
+                for i in range(0, retries):
                     try:
                         func()
                         break
                     except Exception:
-                        print('Restart => {}'.format(i))
+                        print('Restart => {}'.format(i+1))
             else:
                 func()
 
