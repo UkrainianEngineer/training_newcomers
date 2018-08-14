@@ -1,4 +1,4 @@
-In this task, it is needed to create a decorator which retry the function if an error occurred during its execution. The number of function retries must be specified as a global variable, and also transmitted to the decorator. Another part of the task is to create a decorator that caches the values when the function runs several times.
+In this task, it is needed to create a decorator which retry the function if an error occurred during its execution. The number of function retries must be specified as a global variable, and also passed to the decorator. Another part of the task is to create a decorator that caches the values when the function runs several times.
 To solve this task three different function decorators has been implemented. All solution consists of three modules:
 
     - decorator which retries function that might fail during execution. In this case, a number of retries are defined as a global variable and then used inside the decorator function.
