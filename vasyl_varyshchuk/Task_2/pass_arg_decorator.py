@@ -1,25 +1,21 @@
 """
-""
 This module implements a retry decorator with ability to pass a parameter into decorator
 """
 
 import random
 
 
-def decorator(retries=None):
+def decorator(retries=1):
 
     def my_decorator(func):
 
         def func_wrapper():
-            if retries is not None:
-                for i in range(0, retries):
-                    try:
-                        func()
-                        break
-                    except Exception:
-                        print('Restart => {}'.format(i+1))
-            else:
-                func()
+            for i in range(0, retries):
+                try:
+                    func()
+                    break
+                except Exception:
+                    print('Restart => {}'.format(i+1))
 
         return func_wrapper
 
@@ -35,6 +31,5 @@ def some_function():
     else:
         print('This text prints when exception is not raised, i = {}'.format(i))
     
-
 
 some_function()
