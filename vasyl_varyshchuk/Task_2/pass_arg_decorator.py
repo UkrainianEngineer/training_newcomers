@@ -10,7 +10,7 @@ def decorator(retries=1):
     def my_decorator(func):
 
         def func_wrapper():
-            for i in range(0, retries):
+            for i in range(retries):
                 try:
                     func()
                     break

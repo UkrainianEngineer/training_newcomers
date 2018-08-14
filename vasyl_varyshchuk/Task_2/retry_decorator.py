@@ -8,7 +8,7 @@ RETRIES = 4
 def my_decorator(func):
 
     def func_wrapper():
-        for i in range(0, RETRIES):
+        for i in range(RETRIES):
             try:
                 func()
                 break
