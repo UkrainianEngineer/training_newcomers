@@ -11,7 +11,7 @@ ONLY_ONE_ELEM_NUM = ["15"]
 
 
 def test_empty_sequence():
-    assert get_max_value(EMPTY_SEQUENCE) is None
+    assert get_max_value(EMPTY_SEQUENCE) is None, "The result is different then expected"
 
 
 def test_one_number():

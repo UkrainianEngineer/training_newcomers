@@ -6,5 +6,5 @@ def get_max_value(data):
         try:
             sorted_nums_list.append(float(value))
         except ValueError:
-            pass
+            print("The value can't be casted to float type")
     return max(sorted_nums_list) if sorted_nums_list else None
