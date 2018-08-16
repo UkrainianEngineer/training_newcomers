@@ -2,7 +2,6 @@
 This module returns random size of file
 """
 
-import os
 import random
 
 list_of_files = ['reports.txt', 'monthly_reports.zip', 'README.txt',
@@ -10,7 +9,7 @@ list_of_files = ['reports.txt', 'monthly_reports.zip', 'README.txt',
 
 
 def recognize_file_type(file_name):
-    _, extension = os.path.splitext(file_name)
+    _, extension = file_name.split('.')
     return extension
 
 
@@ -34,15 +33,18 @@ def ini_handler():
         return random.randint(1300, 1500)
 
 
+functions = {
+    'txt': txt_handler,
+    'zip': zip_handler,
+    'jpg': jpg_handler,
+    'ttf': ttf_handler,
+    'ini': ini_handler
+ }
+
+
 def run_executors(file_name):
     extension = recognize_file_type(file_name)
-    functions = {
-        '.txt': txt_handler,
-        '.zip': zip_handler,
-        '.jpg': jpg_handler,
-        '.ttf': ttf_handler,
-        '.ini': ini_handler
-        }
+
     size = functions[extension]()
     print('Generated size of {} file => {}'.format(extension, size))
 
