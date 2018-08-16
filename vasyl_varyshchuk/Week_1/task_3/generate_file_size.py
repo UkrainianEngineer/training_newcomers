@@ -42,14 +42,12 @@ functions = {
  }
 
 
-def run_executors(file_name):
-    extension = recognize_file_type(file_name)
+def run_executors(file_names_list):
+    for item in file_names_list:
+        extension = recognize_file_type(item)
+        size = functions[extension]()
+        print('Generated size of {} file => {}'.format(extension, size))
 
-    size = functions[extension]()
-    print('Generated size of {} file => {}'.format(extension, size))
 
-
-# Example of use for single file name
-run_executors('some_file.txt')
-# Run with map for list of file names
-map(run_executors, list_of_files)
+# Example of use
+run_executors(list_of_files)
