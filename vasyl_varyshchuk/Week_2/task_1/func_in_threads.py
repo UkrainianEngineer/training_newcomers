@@ -3,6 +3,7 @@ This module returns random size of file name from list by processing elements in
 """
 
 import random
+import string
 import Queue
 from threading import Thread
 
@@ -18,20 +19,18 @@ def recognize_file_type(file_name):
 
 
 def generate_file_names_list():
-    """This function generate list of files with random names. Length of list is specified by global variable
-    len_of_list which value depend on number on thread."""
-    names = ['na', 'ko', 'mi', 'fo', 'ad', 're', 'du', 'ly', 'ke', 'su', 'bo', 'na']
-    extensions = ['.txt', '.zip', '.ini', '.jpg', '.ttf']
+    """
+    This function generate list of files with random names.
+    Length of list is specified by global variable
+    len_of_list which value depend on number of thread.
+    """
+    extensions = ['txt', 'zip', 'ini', 'jpg', 'ttf']
     file_names = []
 
     for i in range(len_of_list):
-        file_name = ''
-        for j in range(3):
-            index = names.index(random.choice(names))
-            file_name += names[index]
-        ext = extensions.index(random.choice(extensions))
-        file_name += extensions[ext]
-        file_names.append(file_name)
+        file_name = ''.join([random.choice(string.ascii_lowercase) for j in range(5)])
+        full_file_name = '.'.join([file_name, random.choice(extensions)])
+        file_names.append(full_file_name)
 
     return file_names
 
@@ -73,7 +72,7 @@ def run_executors(list_of_file_names):
 
         my_queue = Queue.Queue()
 
-        for i in range(0, number_of_threads):
+        for i in range(number_of_threads):
             thread = Thread(target=handlers[extension], args=(my_queue,))
             threads.append(thread)
 
@@ -88,7 +87,7 @@ def run_executors(list_of_file_names):
 
         while not my_queue.empty():
             res = my_queue.get()
-            print('Size for {} file: {}'.format(item, res))
+            print('Generated size for {} file: {}'.format(item, res))
 
         print('------------------------Processing is complete for "{}"-------------------------'.format(item))
 
