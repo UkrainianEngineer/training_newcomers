@@ -2,15 +2,18 @@
 This module returns random size of file name from list by processing elements in separate threads
 """
 
+#Import required modules
 import random
 import string
 import ConfigParser
 from threading import Thread
 
+#Retrieve number of threads from configuration file
 config = ConfigParser.ConfigParser()
 config.read('config.ini')
 number_of_threads = int(config.get('Main', 'number_of_threads'))
 
+#Define length for list of file names
 length_of_file_names_list = number_of_threads * 100
 
 
@@ -53,8 +56,9 @@ def ttf_handler():
 
 def ini_handler():
         return random.randint(1300, 1500)
+    
 
-
+#Create a map with all handlers
 handlers = {
     'txt': txt_handler,
     'zip': zip_handler,
