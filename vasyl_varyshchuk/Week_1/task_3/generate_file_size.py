@@ -33,7 +33,7 @@ def ini_handler():
         return random.randint(1300, 1500)
 
 
-handlers = {
+functions = {
     'txt': txt_handler,
     'zip': zip_handler,
     'jpg': jpg_handler,
@@ -45,8 +45,7 @@ handlers = {
 def run_executors(file_names_list):
     for item in file_names_list:
         extension = recognize_file_type(item)
-        handler = handlers[extension]
-        size = handler()
+        size = functions[extension]()
         print('Generated size of {} file => {}'.format(extension, size))
 
 
