@@ -5,6 +5,7 @@ This module returns random size of file name from list by processing elements in
 #Import required modules
 import random
 import string
+import ConfigParser
 from threading import Thread
 
 #Retrieve number of threads from configuration file
@@ -28,10 +29,10 @@ def generate_file_names_list():
     """
     extensions = ['txt', 'zip', 'ini', 'jpg', 'ttf']
     file_names = []
-    for i in range(length_of_list):
+    for i in range(length_of_file_names_list):
         file_name = ''.join([random.choice(string.ascii_lowercase) for j in range(5)])
-        full_file_name = '.'.join([file_name, random.choice(extensions)])
-        file_names.append(full_file_name)
+        file_name_with_extension = '.'.join([file_name, random.choice(extensions)])
+        file_names.append(file_name_with_extension)
     return file_names
 
 def txt_handler():
@@ -49,7 +50,6 @@ def ttf_handler():
 def ini_handler():
         return random.randint(1300, 1500)
 
-#Create a map with all handlers
 handlers = {
     'txt': txt_handler,
     'zip': zip_handler,
@@ -58,9 +58,9 @@ handlers = {
     'ini': ini_handler
  }
 
-def choose_handlers(file_names_list):
+def choose_handlers(list_of_file_names):
     """This function runs handlers for corresponding file extensions"""
-    extensions = map(recognize_file_type, file_names_list)
+    extensions = map(recognize_file_type, list_of_file_names)
     for extension in extensions:
         handler = handlers[extension]
         result = handler()
@@ -72,7 +72,7 @@ def run_executors(list_of_file_names):
         thread = Thread(target=choose_handlers, args=(list_of_file_names,))
         thread.start()
         thread.join()
-        print('------------------------Processing is complete for {}-------------------------'.format(thread.name))
+        print('------------------------Processing completed for {}-------------------------'.format(thread.name))
 
 # Example of use
 list_of_files = generate_file_names_list()
