@@ -8,8 +8,7 @@ import ConfigParser
 from multiprocessing import Process
 
 config = ConfigParser.ConfigParser()
-path_to_config_file = '/home/vasyl/GL_Trainee/training_newcomers/vasyl_varyshchuk/Week_2/task_1/config.ini'
-config.read(path_to_config_file)
+config.read('config.ini')
 number_of_processes = int(config.get('Main', 'number_of_processes'))
 
 length_of_file_names_list = number_of_processes * 100
