@@ -7,7 +7,7 @@ import argparse
 from subprocess import call
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--search', help='search for python process')
+parser.add_argument('-s', '--search', help='search for python process')
 args = parser.parse_args()
 
 argument = str(args.search)
