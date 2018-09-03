@@ -3,34 +3,11 @@ This module sends a request to google.com returning the response headers
 and the specified number of searching results
 """
 import requests
-from pip import main
-from pip.req import parse_requirements
-
-
-def install_required_modules():
-    """This function performs installation of required modules from requirements.txt file"""
-    required_modules = parse_requirements('requirements.txt', session=False)
-    requirements = [str(i.req) for i in required_modules]
-    for requirement in requirements:
-        main(['install', requirement])
-
 
 try:
-    from bs import BeautifulSoup
+    from bs4 import BeautifulSoup
 except ImportError:
-    user_answer = None
-    while user_answer not in ('y', 'n'):
-        user_answer = raw_input('To run this module you need to install bs4 library. Would you like to install '
-                                'bs4? [y/n]:')
-        print(user_answer)
-        if user_answer == 'y':
-            print('Trying to install required module.')
-            install_required_modules()
-            from bs4 import BeautifulSoup
-            break
-        elif user_answer == 'n':
-            print('Module bs4 was not installed')
-            break
+    print('To run this script properly you need bs4 module. You can install it from requirements.txt file')
 
 
 user_agent = {'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko)'}
@@ -48,6 +25,7 @@ def parse_headers(response):
     headers = response.headers
     for key, value in headers.items():
         print(key, value)
+    print('------------------------------------------')
     return headers
 
 
@@ -67,7 +45,6 @@ def show_search_result_titles(response):
 
 # Send searching request
 search_response = google_search_request('Python', 5)
-print(search_response.text)
 
 # Print response headers
 parse_headers(search_response)
