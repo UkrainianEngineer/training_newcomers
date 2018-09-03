@@ -1,0 +1,97 @@
+swagger: "2.0"
+info:
+  description: This is the swagger file that goes with our server code
+  version: "1.0.0"
+  title: Swagger REST Article
+consumes:
+  - "application/json"
+produces:
+  - "application/json"
+
+basePath: "/api"
+
+# Paths supported by the server application
+paths:
+  /users/:
+    get:
+      x-swagger-router-controller: app.users
+      operationId: get_users
+      summary: Get list of available users
+      description: "Read the list of people"
+      responses:
+        200:
+          description: "Successful read people list operation"
+          schema:
+            type: "array"
+            items:
+              properties:
+                fname:
+                  type: "string"
+                lname:
+                  type: "string"
+                timestamp:
+                  type: "string"
+
+    post:
+      x-swagger-router-controller: app.users
+      operationId: add_user
+      summary: Get list of available users
+      description: "Read the list of people"
+      parameters:
+        - in: body
+          name: user_data
+          schema:
+            properties:
+              name:
+                type: string
+                example: "Pavlo"
+              surname:
+                type: string
+                example: "Ivanchyshyn"
+              age:
+                type: integer
+                example: 28
+            required:
+            - name
+            - surname
+            - age
+            type: object
+      responses:
+        200:
+          description: User has been successfully added
+
+  /users/{user_id}/:
+    get:
+      tags:
+        - users
+      produces:
+        - application/json
+      x-swagger-router-controller: app.users
+      operationId: get_user
+      summary: Get concrete user
+      parameters:
+        - in: path
+          name: user_id
+          required: true
+          type: string
+          description: ID of user to fetch
+      responses:
+        200:
+          description: User has been successfully fetched
+    delete:
+      tags:
+        - users
+      produces:
+        - application/json
+      x-swagger-router-controller: app.users
+      operationId: remove_user
+      summary: Delete concrete user
+      parameters:
+        - in: path
+          name: user_id
+          required: true
+          type: string
+          description: ID of user to delete
+      responses:
+        200:
+          description: User has been successfully removed
