@@ -41,8 +41,6 @@ def remove_user(user_id):
     user = current_app.config["context"]["users_manager"].remove_user(user_id)
     return {"user_id": user_id}, requests.codes.ok
 
-"""
-def update_user(user_data):
-    user = current_app.config["context"]["users_manager"].update_user(user_data)
+def update_user(user_id, user_data):
+    user = current_app.config["context"]["users_manager"].update_user(user_id, user_data)
     return {"user_id": user_id}, requests.codes.ok
-"""

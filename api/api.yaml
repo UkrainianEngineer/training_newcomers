@@ -95,3 +95,35 @@ paths:
       responses:
         200:
           description: User has been successfully removed
+
+    put:
+      tags:
+        - users
+      produces:
+        - application/json
+      x-swagger-router-controller: app.users
+      operationId: update_user
+      summary: Update concrete user
+      parameters:
+        - in: path
+          name: user_id
+          required: true
+          type: string
+          description: ID of user to fetch
+        - in: body
+          name: user_data
+          schema:
+            properties:
+              name:
+                type: string
+                example: "Pavlo"
+              surname:
+                type: string
+                example: "Ivanchyshyn"
+              age:
+                type: integer
+                example: 28
+            type: object
+      responses:
+        200:
+          description: User has been successfully updated
