@@ -1,0 +1,1 @@
+This module realizes functions for sends requests to REST API server using different HTTP methods. For sending request python requests module is used. Implemented functions allow get information about users on the server and also add a new user, update information about users and delete users.
